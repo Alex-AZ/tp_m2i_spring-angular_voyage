@@ -4,4 +4,6 @@ import com.m2i.tpspringangular.voyage.entities.AdminEntity;
 import org.springframework.data.repository.CrudRepository;
 
 public interface AdminRepository extends CrudRepository<AdminEntity, Integer> {
+
+    public AdminEntity findByUsername(String username);
 }
