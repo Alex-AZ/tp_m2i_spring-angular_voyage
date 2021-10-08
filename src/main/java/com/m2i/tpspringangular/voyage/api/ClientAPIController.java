@@ -1,7 +1,6 @@
 package com.m2i.tpspringangular.voyage.api;
 
 import com.m2i.tpspringangular.voyage.entities.ClientEntity;
-import com.m2i.tpspringangular.voyage.entities.HotelEntity;
 import com.m2i.tpspringangular.voyage.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 
 @RestController()

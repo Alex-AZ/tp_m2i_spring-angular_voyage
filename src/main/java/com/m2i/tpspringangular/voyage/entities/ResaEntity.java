@@ -1,5 +1,7 @@
 package com.m2i.tpspringangular.voyage.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,12 +11,15 @@ public class ResaEntity {
     private int id;
     private ClientEntity client;
     private HotelEntity hotel;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date datedeb;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date datefin;
     private int num_chambre;
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -34,7 +39,7 @@ public class ResaEntity {
     }
 
     @OneToOne
-    @JoinColumn(name = "client", referencedColumnName = "id")
+    @JoinColumn(name = "hotel", referencedColumnName = "id")
     public HotelEntity getHotel() {
         return hotel;
     }

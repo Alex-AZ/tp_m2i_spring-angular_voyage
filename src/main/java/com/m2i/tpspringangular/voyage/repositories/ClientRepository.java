@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ClientRepository extends CrudRepository<ClientEntity, Integer> {
 
-    Optional<ClientEntity> findByEmail(String email);
+    /*Optional<ClientEntity> findByEmail(String email);
 
-    Iterable<ClientEntity> findByNomContainsOrPrenomContains(String nom_complet, String telephone);
+    Iterable<ClientEntity> findByNomContainsOrPrenomContains(String nom_complet, String telephone);*/
 }

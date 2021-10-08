@@ -1,7 +1,6 @@
 package com.m2i.tpspringangular.voyage.services;
 
 import com.m2i.tpspringangular.voyage.entities.ClientEntity;
-import com.m2i.tpspringangular.voyage.entities.HotelEntity;
 import com.m2i.tpspringangular.voyage.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,13 +75,13 @@ public class ClientService {
             return cr.findById(id).get();
     }
 
-    public ClientEntity findByEmail(String email) {
+    /*public ClientEntity findByEmail(String email) {
         try {
             return cr.findByEmail( email ).get();
         }catch( Exception e ) {
             return null;
         }
-    }
+    }*/
 
     public void delete(int id) {
         cr.deleteById(id);
