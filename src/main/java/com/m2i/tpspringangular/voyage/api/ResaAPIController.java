@@ -1,6 +1,9 @@
 package com.m2i.tpspringangular.voyage.api;
 
+import com.m2i.tpspringangular.voyage.entities.ClientEntity;
+import com.m2i.tpspringangular.voyage.entities.HotelEntity;
 import com.m2i.tpspringangular.voyage.entities.ResaEntity;
+import com.m2i.tpspringangular.voyage.services.ClientService;
 import com.m2i.tpspringangular.voyage.services.ResaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,8 +24,7 @@ public class ResaAPIController {
     ResaService rs;
 
     @GetMapping(path = "", produces = "application/json")
-    public Iterable<ResaEntity> getAllResaApi(HttpServletRequest request) {
-        System.out.println("\nVal recherchée = " + request.getParameter("search") + "\n");
+    Iterable<ResaEntity> getAllResaApi(HttpServletRequest request) {
         return rs.getList(request.getParameter("search"));
     }
 
@@ -47,7 +49,7 @@ public class ResaAPIController {
 
         try {
             ResaEntity createResa = rs.addResa(resa.getClient().getId(), resa.getHotel().getId(), dateFormaStrD,
-                    dateFormaStrF, resa.getNum_chambre());
+                    dateFormaStrF, resa.getNumChambre());
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                     .path("/{id")
@@ -72,7 +74,7 @@ public class ResaAPIController {
 
         try{
             ResaEntity updateResa = rs.editResa(id, resa.getClient().getId(), resa.getHotel().getId(), dateFormaStrD,
-                    dateFormaStrF, resa.getNum_chambre());
+                    dateFormaStrF, resa.getNumChambre());
 
 
             return ResponseEntity.ok() // OK => HTTP 200

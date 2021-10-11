@@ -23,7 +23,7 @@ public class ResaService {
         if (search == null || search.length() == 0) {
             return rr.findAll();
         } else {
-            return rr.findByClientContains((search));
+            return rr.findByClientNomCompletContains(search);
         }
     }
 
@@ -31,7 +31,15 @@ public class ResaService {
         return rr.findById( id ).get();
     }
 
-    public ResaEntity addResa(int client, int hotel, String datedeb, String datefin, int num_chambre ) throws Exception {
+    public Iterable<ResaEntity> chekResa(int numChambre, Date dateDeb) throws Exception {
+        if (rr.findByClientNomCompletContains(numChambre, dateDeb).length() == 0) {
+            return rr.save();
+        } else {
+            throw new Exception("Reservation is already exists");
+        }
+    }
+
+    public ResaEntity addResa(int client, int hotel, String datedeb, String datefin, int numChambre ) throws Exception {
         ResaEntity r = new ResaEntity();
         ClientEntity clientR = new ClientEntity();
         clientR.setId(client);
@@ -52,14 +60,14 @@ public class ResaService {
         Date dateF = formatterF.parse(datefin);
         r.setDatefin(dateF);
 
-        r.setNum_chambre(num_chambre);
+        r.setNumChambre(numChambre);
 
         rr.save(r);
 
         return r;
     }
 
-    public ResaEntity editResa(int idr, int client, int hotel, String datedeb, String datefin, int num_chambre ) throws Exception {
+    public ResaEntity editResa(int idr, int client, int hotel, String datedeb, String datefin, int numChambre ) throws Exception {
         ResaEntity r = rr.findById(idr).get();
         ClientEntity clientR = new ClientEntity();
         clientR.setId(client);
@@ -78,21 +86,12 @@ public class ResaService {
         Date dateF = formatterF.parse(datefin);
         r.setDatefin(dateF);
 
-        r.setNum_chambre(num_chambre);
+        r.setNumChambre(numChambre);
 
         rr.save(r);
 
         return r;
     }
-
-    /*public ResaEntity findByEmail(String email) {
-        try {
-            return pr.findByEmail( email ).get();
-        }catch( Exception e ) {
-            return null;
-        }
-
-    }*/
 
     public void delete(int id) {
         rr.deleteById(id);

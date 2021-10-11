@@ -31,7 +31,7 @@ public class ClientAPIController {
     @PostMapping(path = "", produces = "application/json")
     public ResponseEntity<ClientEntity> add(@RequestBody ClientEntity client) {
         try {
-            ClientEntity createClient = cs.addClient(client.getNom_complet(), client.getTelephone(),
+            ClientEntity createClient = cs.addClient(client.getNomComplet(), client.getTelephone(),
                     client.getEmail(), client.getAdresse());
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -51,7 +51,7 @@ public class ClientAPIController {
     @PutMapping(path = "/{id}", produces = "application/json")
     public ResponseEntity<ClientEntity> edit(@RequestBody ClientEntity client, @PathVariable("id") int id) {
         try {
-            ClientEntity updatedClient = cs.editClient(id, client.getNom_complet(), client.getTelephone(),
+            ClientEntity updatedClient = cs.editClient(id, client.getNomComplet(), client.getTelephone(),
                     client.getEmail(), client.getAdresse());
 
 

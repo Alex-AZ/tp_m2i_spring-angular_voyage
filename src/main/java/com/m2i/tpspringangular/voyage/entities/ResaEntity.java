@@ -15,7 +15,7 @@ public class ResaEntity {
     private Date datedeb;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date datefin;
-    private int num_chambre;
+    private int numChambre;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -70,11 +70,11 @@ public class ResaEntity {
 
     @Basic
     @Column(name = "num_chambre", nullable = false)
-    public int getNum_chambre() {
-        return num_chambre;
+    public int getNumChambre() {
+        return numChambre;
     }
 
-    public void setNum_chambre(int num_chambre) {
-        this.num_chambre = num_chambre;
+    public void setNumChambre(int numChambre) {
+        this.numChambre = numChambre;
     }
 }

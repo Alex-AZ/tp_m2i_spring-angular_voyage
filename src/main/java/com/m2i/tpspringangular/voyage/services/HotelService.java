@@ -1,6 +1,5 @@
 package com.m2i.tpspringangular.voyage.services;
 
-import com.m2i.tpspringangular.voyage.entities.ClientEntity;
 import com.m2i.tpspringangular.voyage.entities.HotelEntity;
 import com.m2i.tpspringangular.voyage.repositories.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "client", schema = "voyage", catalog = "")
 public class ClientEntity {
     private int id;
-    private String nom_complet;
+    private String nomComplet;
     private String telephone;
     private String email;
     private String adresse;
@@ -23,12 +23,12 @@ public class ClientEntity {
 
     @Basic
     @Column(name = "nom_complet", nullable = false, length = 255)
-    public String getNom_complet() {
-        return nom_complet;
+    public String getNomComplet() {
+        return nomComplet;
     }
 
-    public void setNom_complet(String nom_complet) {
-        this.nom_complet = nom_complet;
+    public void setNomComplet(String nomComplet) {
+        this.nomComplet = nomComplet;
     }
 
     @Basic
