@@ -1,9 +1,6 @@
 package com.m2i.tpspringangular.voyage.api;
 
-import com.m2i.tpspringangular.voyage.entities.ClientEntity;
-import com.m2i.tpspringangular.voyage.entities.HotelEntity;
 import com.m2i.tpspringangular.voyage.entities.ResaEntity;
-import com.m2i.tpspringangular.voyage.services.ClientService;
 import com.m2i.tpspringangular.voyage.services.ResaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -59,12 +56,11 @@ public class ResaAPIController {
             return ResponseEntity.created(uri) // created => HTTP 201
                     .body(createResa);
         } catch (Exception e) {
-            System.out.println("Je suis ici");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
-    @PutMapping(path="/{id}", produces = "application/json")
+    @PutMapping(path = "/{id}", produces = "application/json")
     public ResponseEntity<ResaEntity> updateResaApi(@RequestBody ResaEntity resa, @PathVariable(name = "id") int id) {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -72,7 +68,7 @@ public class ResaAPIController {
         String dateFormaStrD = format.format(resa.getDatedeb());
         String dateFormaStrF = format.format((resa.getDatefin()));
 
-        try{
+        try {
             ResaEntity updateResa = rs.editResa(id, resa.getClient().getId(), resa.getHotel().getId(), dateFormaStrD,
                     dateFormaStrF, resa.getNumChambre());
 
@@ -80,19 +76,18 @@ public class ResaAPIController {
             return ResponseEntity.ok() // OK => HTTP 200
                     .body(updateResa);
 
-        }catch ( Exception e ){
-            System.out.println("Je suis ici");
-            throw new ResponseStatusException( HttpStatus.BAD_REQUEST , e.getMessage()  );
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
-    @DeleteMapping(path="/{id}")
-    public ResponseEntity<Object> delete(@PathVariable("id") int id ){
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Object> delete(@PathVariable("id") int id) {
         try {
             rs.delete(id);
             return ResponseEntity.ok() // HTTP 200
                     .body(null);
-        }catch( Exception e ){
+        } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }

@@ -30,7 +30,6 @@ public class AdminDetailsImpl implements UserDetails {
 
     @Override
     public String getPassword() {
-        System.out.println(admin.getPassword());
         return admin.getPassword();
     }
 

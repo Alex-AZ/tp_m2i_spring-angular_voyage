@@ -19,7 +19,7 @@ public class ResaService {
         this.rr = rr;
     }
 
-    public Iterable<ResaEntity> getList(String search){
+    public Iterable<ResaEntity> getList(String search) {
         if (search == null || search.length() == 0) {
             return rr.findAll();
         } else {
@@ -28,7 +28,7 @@ public class ResaService {
     }
 
     public ResaEntity find(int id) {
-        return rr.findById( id ).get();
+        return rr.findById(id).get();
     }
 
     public void checkResa(int numChambre, Date dateDeb) throws Exception {
@@ -36,12 +36,12 @@ public class ResaService {
             throw new Exception("Reservation is already exists");
     }
 
-    public ResaEntity addResa(int client, int hotel, String datedeb, String datefin, int numChambre ) throws Exception {
+    public ResaEntity addResa(int client, int hotel, String datedeb, String datefin, int numChambre) throws Exception {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         Date date = formatter.parse(datedeb);
+        checkResa(numChambre, date);
 
-        checkResa(numChambre , date);
         ResaEntity r = new ResaEntity();
         ClientEntity clientR = new ClientEntity();
         clientR.setId(client);
@@ -49,27 +49,22 @@ public class ResaService {
         HotelEntity hotelR = new HotelEntity();
         hotelR.setId(hotel);
         r.setHotel(hotelR);
-
-        System.out.println("La date de début est : " + datedeb);
-        SimpleDateFormat formatterD = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
-        Date dateD = formatterD.parse(datedeb);
+        Date dateD = formatter.parse(datedeb);
         r.setDatedeb(dateD);
-
-        System.out.println("La date de fin est : " + datefin);
-        SimpleDateFormat formatterF = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
-        Date dateF = formatterF.parse(datefin);
+        Date dateF = formatter.parse(datefin);
         r.setDatefin(dateF);
-
         r.setNumChambre(numChambre);
-
         rr.save(r);
 
         return r;
     }
 
-    public ResaEntity editResa(int idr, int client, int hotel, String datedeb, String datefin, int numChambre ) throws Exception {
+    public ResaEntity editResa(int idr, int client, int hotel, String datedeb, String datefin, int numChambre) throws Exception {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date dateDebCheck = formatter.parse(datedeb);
+        checkResa(numChambre, dateDebCheck);
+
         ResaEntity r = rr.findById(idr).get();
         ClientEntity clientR = new ClientEntity();
         clientR.setId(client);
@@ -77,19 +72,11 @@ public class ResaService {
         HotelEntity hotelR = new HotelEntity();
         hotelR.setId(hotel);
         r.setHotel(hotelR);
-
-        SimpleDateFormat formatterD = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
-        Date dateD = formatterD.parse(datedeb);
+        Date dateD = formatter.parse(datedeb);
         r.setDatedeb(dateD);
-
-        SimpleDateFormat formatterF = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
-        Date dateF = formatterF.parse(datefin);
+        Date dateF = formatter.parse(datefin);
         r.setDatefin(dateF);
-
         r.setNumChambre(numChambre);
-
         rr.save(r);
 
         return r;
