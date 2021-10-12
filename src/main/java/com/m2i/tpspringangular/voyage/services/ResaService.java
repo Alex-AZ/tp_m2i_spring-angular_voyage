@@ -31,15 +31,17 @@ public class ResaService {
         return rr.findById( id ).get();
     }
 
-    public Iterable<ResaEntity> chekResa(int numChambre, Date dateDeb) throws Exception {
-        if (rr.findByClientNomCompletContains(numChambre, dateDeb).length() == 0) {
-            return rr.save();
-        } else {
+    public void checkResa(int numChambre, Date dateDeb) throws Exception {
+        if (rr.findByNumChambreAndDatedeb(numChambre, dateDeb).iterator().hasNext())
             throw new Exception("Reservation is already exists");
-        }
     }
 
     public ResaEntity addResa(int client, int hotel, String datedeb, String datefin, int numChambre ) throws Exception {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        Date date = formatter.parse(datedeb);
+
+        checkResa(numChambre , date);
         ResaEntity r = new ResaEntity();
         ClientEntity clientR = new ClientEntity();
         clientR.setId(client);

@@ -11,6 +11,4 @@ public interface ResaRepository extends CrudRepository<ResaEntity, Integer> {
 
     Iterable<ResaEntity> findByNumChambreAndDatedeb(int numChambre, Date dateDeb);
 
-    CharSequence findByClientNomCompletContains(int numChambre, Date dateDeb);
-
 }
